@@ -1,42 +1,36 @@
-@@ -1,10 +1,34 @@
--// Select color input
--// Select size input
--
--// When size is submitted by the user, call makeGrid()
-+/*
-+Input: no input
-+Output: no output
-+Behavior: change current scope background color to the color picked from colorPicker
-+*/
-+function changeColor() {
-+    const color = document.getElementById("colorPicker").value;
-+    this.style.background = color;
-+}
- 
--function makeGrid() {
- 
--// Your code goes here!
- 
--}
-+/*
-+Input: no input
-+Output: no output
-+Behavior : It creates a table with width and height from input. Each cell contains 
-+            onclick event handler that calls changeColor() function.
-+            After the event, the behavior stays without going to default.
-+*/
-+function makeGrid() {
-+    const gridHeight = document.getElementById("input_height").value;
-+    const gridWidth = document.getElementById("input_width").value;
-+    const pixelCanvas = document.getElementById("pixel_canvas"); 
-+    pixelCanvas.innerText=""; // empty table   
-+    
-+    for (let h=0; h<gridHeight; ++h) {
-+        const row = pixelCanvas.insertRow(-1); // insert new row at the last position
-+        for (let w=0; w<gridWidth; ++w) {
-+            const cell = row.insertCell(-1); //insert new cell at the last position
-+            cell.onclick = changeColor;
-+        }
-+    }
-+    event.preventDefault();
-+}
+/ Select color input
+// Select size input
+var height, width, color;
+// When size is submitted by the user, call makeGrid()
+$('#sizePicker').submit(function (event){
+  event.preventDefualt();
+  height = $('inputHeight').val();
+  width = $('inputWeight').val();
+  makeGrid(height, width);
+  // console.log('height:' + height + 'and width:' + width );
+   
+
+})
+
+function makeGrid(x, y) {
+screen('tr').remove()
+// Your code goes here!
+for (var i = 1; i<=x; i++) {
+    $('#pixelCanvas').append('<tr id=table' + 1 + '></tr')
+    for (var j = 1; i<=y; j++) {
+      $('#table' +1).append('<td></td>');
+    }
+    } 
+   // add color to cell
+   $('td').click(function addcolor(){
+     color = $('#colorPicker').val();
+
+     if ($(this).attr('style')) {
+       $(this).removeAttr('style')
+     } else {
+       $(this).attr('style', 'background-color:' + color);
+
+     }
+    
+})
+}
